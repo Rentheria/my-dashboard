@@ -1,7 +1,12 @@
-import { getPokemons, PokemonGrid, SimplePokemon } from '@/pokemons';
+import { PokemonGrid } from '@/pokemons';
+import { Metadata } from 'next';
 
-export default async function PokemonPage() {
-  const pokemons: SimplePokemon[] = await getPokemons(151);
+export const metadata: Metadata = {
+  title: 'MyFavorite Pokemons',
+  description: 'Favorite Pokemons List',
+};
+
+export default function FavoritePage() {
   return (
     <div className="flex flex-col gap-8 p-4 min-h-screen bg-gray-200">
       <div className="flex flex-col items-center justify-center py-6 md:py-10 bg-linear-to-r from-red-600 to-red-800 rounded-3xl shadow-xl border-4 border-gray-800 relative overflow-hidden">
@@ -10,11 +15,11 @@ export default async function PokemonPage() {
           Pokedex <span className="text-yellow-400 block md:inline">Kanto</span>
         </h2>
         <span className="text-white/80 font-mono mt-2 z-10 font-bold bg-black/30 px-4 py-1 rounded-full border border-white/20 text-sm md:text-base text-center mx-4">
-          Listado de Pokemons estáticos
+          Mis Pokemons favoritos
         </span>
       </div>
 
-      <PokemonGrid pokemons={pokemons} />
+      <PokemonGrid pokemons={[]} />
     </div>
   );
 }

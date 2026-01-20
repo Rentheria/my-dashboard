@@ -1,24 +1,25 @@
-import { getPokemon } from '@/pokemons';
+import { getPokemon, getPokemons } from '@/pokemons';
 import { PokemonDetail } from '@/pokemons/components/PokemonDetail';
 import { Metadata } from 'next';
 
 interface Props {
-  params: Promise<{ id: string }>;
+  params: Promise<{ name: string }>;
 }
 
 export async function generateStaticParams() {
-  return Array.from({ length: 151 }, (_, i) => ({
-    id: (i + 1).toString(),
+  const pokemons = await getPokemons(151);
+  return pokemons.map((pokemon) => ({
+    name: pokemon.name,
   }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
-    const { id } = await params;
-    const pokemon = await getPokemon(id);
+    const { name } = await params;
+    const pokemon = await getPokemon(name);
 
     return {
-      title: `Pokemon #${id} - ${pokemon.name}`,
+      title: `Pokemon #${pokemon.id} - ${pokemon.name}`,
       description: `Página del pokémon ${pokemon.name}`,
     };
   } catch {
@@ -30,8 +31,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PokemonPage({ params }: Props) {
-  const { id } = await params;
-  const pokemon = await getPokemon(id);
+  const { name } = await params;
+  const pokemon = await getPokemon(name);
 
   return <PokemonDetail pokemon={pokemon} />;
 }
