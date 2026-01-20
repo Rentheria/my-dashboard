@@ -13,7 +13,7 @@ export const PokemonCard = ({ pokemon }: Props) => {
   return (
     <div className="mx-auto right-0 mt-2 w-60">
       <div className="flex flex-col bg-white rounded overflow-hidden shadow-lg border-4 border-gray-800">
-        <div className="flex flex-col items-center text-center p-6 bg-linear-to-br from-red-500 to-red-600 border-b-4 border-gray-800">
+        <div className="flex flex-col items-center text-center p-6 bg-linear-to-br from-slate-500 to-slate-600 border-b-4 border-gray-800">
           <div className="relative bg-white/10 rounded-full p-4 mb-2 border-2 border-white/20">
             <Image
               key={id}
@@ -31,7 +31,7 @@ export const PokemonCard = ({ pokemon }: Props) => {
           </p>
           <div className="mt-5">
             <Link
-              href={`/dashboard/pokemon/${id}`}
+              href={`/dashboard/pokemons/${name}`}
               className="border-2 border-white rounded-full py-2 px-4 text-xs font-semibold text-white hover:bg-white hover:text-red-500 transition-colors uppercase font-mono"
             >
               Más información
