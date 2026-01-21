@@ -1,34 +1,52 @@
 'use client';
 
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store';
+import {
+  decrement,
+  increment,
+  initCounterState,
+} from '@/store/counter/CounterSilce';
+import { useEffect } from 'react';
 
 interface CartCoiunterProps {
   value?: number;
 }
+interface CounterResponse {
+  count: number;
+  method: string;
+}
+
+const getApiCounter = async (): Promise<CounterResponse> => {
+  const response = await fetch('/api/counter').then((res) => res.json());
+  return response;
+};
 
 export const CartCoiunter = ({ value = 0 }: CartCoiunterProps) => {
-  const [count, setCount] = useState(value);
+  const count = useAppSelector((state) => state.counter.counter);
+  const dispatch = useAppDispatch();
 
-  const handleAdd = () => {
-    setCount(count + 1);
-  };
+  // useEffect(() => {
+  //   dispatch(initCounterState(value));
+  // }, [dispatch, value]);
 
-  const handleSubtract = () => {
-    setCount(count - 1);
-  };
+  useEffect(() => {
+    getApiCounter().then(({ count }) => {
+      dispatch(initCounterState(count));
+    });
+  }, [dispatch]);
 
   return (
     <>
       <span className="text-9xl font-bold"> {count}</span>
       <div className="flex gap-4">
         <button
-          onClick={handleSubtract}
+          onClick={() => dispatch(decrement())}
           className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors"
         >
           -1
         </button>
         <button
-          onClick={handleAdd}
+          onClick={() => dispatch(increment())}
           className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors"
         >
           +1

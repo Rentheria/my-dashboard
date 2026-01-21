@@ -2,7 +2,7 @@ import { PokemonGrid } from '@/pokemons';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'MyFavorite Pokemons',
+  title: 'My Favorite Pokemons',
   description: 'Favorite Pokemons List',
 };
 
