@@ -6,7 +6,7 @@ interface CounterState {
 }
 
 const initialState: CounterState = {
-  counter: 0,
+  counter: 100,
   isReadonly: false,
 };
 

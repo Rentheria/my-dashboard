@@ -1,5 +1,5 @@
-import { PokemonGrid } from '@/pokemons';
 import { Metadata } from 'next';
+import { FavoritePokemon } from '@/pokemons';
 
 export const metadata: Metadata = {
   title: 'My Favorite Pokemons',
@@ -19,7 +19,7 @@ export default function FavoritePage() {
         </span>
       </div>
 
-      <PokemonGrid pokemons={[]} />
+      <FavoritePokemon />
     </div>
   );
 }
